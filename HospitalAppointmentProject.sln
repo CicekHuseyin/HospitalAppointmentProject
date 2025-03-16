@@ -1,0 +1,64 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35327.3
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{88FE5D03-9971-46AB-9613-01BC0E91B223}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "core", "core", "{BBDD17B4-BB7F-4CE7-9EA2-AC7AEDB501CE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "projects", "projects", "{EC24C44C-B732-4AA7-88A2-AF3D17EE1361}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HospitalAppointmentProject.Model", "src\projects\HospitalAppointmentProject.Model\HospitalAppointmentProject.Model.csproj", "{EDF09053-F2DB-4F9F-8BC2-08DE4AE9052E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HospitalAppointmentProject.DataAccess", "src\projects\HospitalAppointmentProject.DataAccess\HospitalAppointmentProject.DataAccess.csproj", "{5C829691-8126-4CCD-9B85-CF7895C3EE2E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HospitalAppointmentProject.Service", "src\projects\HospitalAppointmentProject.Service\HospitalAppointmentProject.Service.csproj", "{F90EB8C0-E541-4B81-9700-BCFF0B2F599F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HospitalAppointmentProject.API", "src\projects\HospitalAppointmentProject.API\HospitalAppointmentProject.API.csproj", "{870BF95F-D429-47F8-BA7B-4682CFC4A387}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.DataAccess", "src\core\Core.DataAccess\Core.DataAccess.csproj", "{F0DBF1FC-295B-4BCC-856D-661ECF135903}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EDF09053-F2DB-4F9F-8BC2-08DE4AE9052E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EDF09053-F2DB-4F9F-8BC2-08DE4AE9052E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EDF09053-F2DB-4F9F-8BC2-08DE4AE9052E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EDF09053-F2DB-4F9F-8BC2-08DE4AE9052E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5C829691-8126-4CCD-9B85-CF7895C3EE2E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C829691-8126-4CCD-9B85-CF7895C3EE2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C829691-8126-4CCD-9B85-CF7895C3EE2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C829691-8126-4CCD-9B85-CF7895C3EE2E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F90EB8C0-E541-4B81-9700-BCFF0B2F599F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F90EB8C0-E541-4B81-9700-BCFF0B2F599F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F90EB8C0-E541-4B81-9700-BCFF0B2F599F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F90EB8C0-E541-4B81-9700-BCFF0B2F599F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{870BF95F-D429-47F8-BA7B-4682CFC4A387}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{870BF95F-D429-47F8-BA7B-4682CFC4A387}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{870BF95F-D429-47F8-BA7B-4682CFC4A387}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{870BF95F-D429-47F8-BA7B-4682CFC4A387}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F0DBF1FC-295B-4BCC-856D-661ECF135903}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F0DBF1FC-295B-4BCC-856D-661ECF135903}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F0DBF1FC-295B-4BCC-856D-661ECF135903}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F0DBF1FC-295B-4BCC-856D-661ECF135903}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{BBDD17B4-BB7F-4CE7-9EA2-AC7AEDB501CE} = {88FE5D03-9971-46AB-9613-01BC0E91B223}
+		{EC24C44C-B732-4AA7-88A2-AF3D17EE1361} = {88FE5D03-9971-46AB-9613-01BC0E91B223}
+		{EDF09053-F2DB-4F9F-8BC2-08DE4AE9052E} = {EC24C44C-B732-4AA7-88A2-AF3D17EE1361}
+		{5C829691-8126-4CCD-9B85-CF7895C3EE2E} = {EC24C44C-B732-4AA7-88A2-AF3D17EE1361}
+		{F90EB8C0-E541-4B81-9700-BCFF0B2F599F} = {EC24C44C-B732-4AA7-88A2-AF3D17EE1361}
+		{870BF95F-D429-47F8-BA7B-4682CFC4A387} = {EC24C44C-B732-4AA7-88A2-AF3D17EE1361}
+		{F0DBF1FC-295B-4BCC-856D-661ECF135903} = {BBDD17B4-BB7F-4CE7-9EA2-AC7AEDB501CE}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D0F72BF0-595A-46A3-BF35-FA118883B35D}
+	EndGlobalSection
+EndGlobal
