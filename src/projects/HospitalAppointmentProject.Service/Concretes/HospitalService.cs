@@ -2,10 +2,11 @@
 using HospitalAppointmentProject.DataAccess.Repositories.Abstracts;
 using HospitalAppointmentProject.Model.Dtos.Hospitals;
 using HospitalAppointmentProject.Model.Entities;
+using HospitalAppointmentProject.Service.Abstracts;
 
 namespace HospitalAppointmentProject.Service.Concretes;
 
-public class HospitalService
+public class HospitalService : IHospitalService
 {
     private readonly IHospitalRepository _hospitalRepository;
     private readonly IMapper _mapper;

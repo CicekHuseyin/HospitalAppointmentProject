@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\HospitalAppointmentProject.DataAccess\HospitalAppointmentProject.DataAccess.csproj" />
+    <ProjectReference Include="..\HospitalAppointmentProject.Service\HospitalAppointmentProject.Service.csproj" />
   </ItemGroup>
 
 </Project>

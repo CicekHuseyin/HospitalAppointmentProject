@@ -2,10 +2,11 @@
 using HospitalAppointmentProject.DataAccess.Repositories.Abstracts;
 using HospitalAppointmentProject.Model.Dtos.Roles;
 using HospitalAppointmentProject.Model.Entities;
+using HospitalAppointmentProject.Service.Abstracts;
 
 namespace RoleAppointmentProject.Service.Concretes;
 
-public class RoleService
+public class RoleService : IRoleService
 {
     private readonly IRoleRepository _roleRepository;
     private readonly IMapper _mapper;

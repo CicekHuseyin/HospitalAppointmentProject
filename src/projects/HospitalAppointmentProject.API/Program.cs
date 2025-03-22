@@ -1,9 +1,16 @@
 using HospitalAppointmentProject.DataAccess.Contexts;
-using Microsoft.AspNetCore.Authentication;
+using HospitalAppointmentProject.DataAccess.Repositories.Abstracts;
+using HospitalAppointmentProject.DataAccess.Repositories.Concretes;
+using HospitalAppointmentProject.Service.Abstracts;
+using HospitalAppointmentProject.Service.Concretes;
+using HospitalDoctorProject.Service.Abstracts;
+using HospitalDoctorProject.Service.Concretes;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
+using PatientAppointmentProject.Service.Concretes;
+using RoleAppointmentProject.Service.Concretes;
 using System.Reflection;
-
+using UserAppointmentProject.Service.Concretes;
+using UserRoleAppointmentProject.Service.Concretes;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -14,6 +21,20 @@ builder.Services.AddDbContext<BaseDbContext>(opt =>
     opt.UseSqlServer(builder.Configuration.GetConnectionString("SqlConnection"));
 });
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
+builder.Services.AddScoped<IDoctorService, DoctorService>();
+builder.Services.AddScoped<IDoctorRepository, DoctorRepository>();
+builder.Services.AddScoped<IAppointmentService, AppointmentService>();
+builder.Services.AddScoped<IAppointmentRepository, AppointmentRepository>();
+builder.Services.AddScoped<IHospitalService, HospitalService>();
+builder.Services.AddScoped<IHospitalRepository, HospitalRepository>();
+builder.Services.AddScoped<IPatientService, PatientService>();
+builder.Services.AddScoped<IPatientRepository, PatientRepository>();
+builder.Services.AddScoped<IRoleService, RoleService>();
+builder.Services.AddScoped<IRoleRepository, RoleRepository>();
+builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IUserRoleService, UserRoleService>();
+builder.Services.AddScoped<IUserRoleRepository, UserRoleRepository>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
