@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\core\Core.CrossCuttingConcerns\Core.CrossCuttingConcerns.csproj" />
     <ProjectReference Include="..\HospitalAppointmentProject.DataAccess\HospitalAppointmentProject.DataAccess.csproj" />
     <ProjectReference Include="..\HospitalAppointmentProject.Model\HospitalAppointmentProject.Model.csproj" />
   </ItemGroup>

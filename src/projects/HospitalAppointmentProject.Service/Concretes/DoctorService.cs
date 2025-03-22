@@ -2,6 +2,8 @@
 using HospitalAppointmentProject.DataAccess.Repositories.Abstracts;
 using HospitalAppointmentProject.Model.Dtos.Doctors;
 using HospitalAppointmentProject.Model.Entities;
+using HospitalAppointmentProject.Service.BusinessRules.Doctors;
+using HospitalAppointmentProject.Service.Constants.Doctors;
 using HospitalDoctorProject.Service.Abstracts;
 
 namespace HospitalDoctorProject.Service.Concretes;
@@ -10,24 +12,26 @@ public class DoctorService :IDoctorService
 {
     private readonly IDoctorRepository _doctorRepository;
     private readonly IMapper _mapper;
+    private readonly DoctorBusinessRules _businessRules;
 
-    public DoctorService(IDoctorRepository doctorRepository, IMapper mapper)
+    public DoctorService(IDoctorRepository doctorRepository, IMapper mapper, DoctorBusinessRules businessRules)
     {
         _doctorRepository = doctorRepository;
         _mapper = mapper;
+        _businessRules = businessRules;
     }
 
     public async Task<string> AddAsync(DoctorAddRequestDto dto, CancellationToken cancellationToken = default)
     {
-        //await _businessRules.MovieTitleMustBeUniqueAsync(dto.Name);
+        await _businessRules.DoctorNameMustBeUniqueAsync(dto.FirstName);
         Doctor doctor = _mapper.Map<Doctor>(dto);
         await _doctorRepository.AddAsync(doctor);
-        return "Buraya Business Roles gelecek";
+        return DoctorMessages.DoctorAddedMessage;
     }
 
     public async Task DeleteAsync(int id, CancellationToken cancellationToken = default)
     {
-        //await _businessRules.MovieIsPresentAsync(id);
+        await _businessRules.DoctorIsPresentAsync(id);
 
         Doctor doctor = await _doctorRepository.GetAsync(filter: x => x.Id == id, include: false, cancellationToken: cancellationToken);
 
@@ -43,7 +47,7 @@ public class DoctorService :IDoctorService
 
     public async Task<DoctorResponseDto?> GetByIdAsync(int id, CancellationToken cancellationToken = default)
     {
-        //await _businessRules.MovieIsPresentAsync(id);
+        await _businessRules.DoctorIsPresentAsync(id);
         Doctor doctor = await _doctorRepository.GetAsync(filter: x => x.Id == id, enableTracking: false, cancellationToken: cancellationToken);
         var doctorResponseDtos = _mapper.Map<DoctorResponseDto>(doctor);
         return doctorResponseDtos;
@@ -51,7 +55,7 @@ public class DoctorService :IDoctorService
 
     public async Task UpdateAsync(DoctorUpdateRequestDto dto, CancellationToken cancellationToken = default)
     {
-        //await _businessRules.MovieIsPresentAsync(dto.Id);
+        await _businessRules.DoctorIsPresentAsync(dto.Id);
         ////Movie movie = await _movieRepository.GetAsync(filter: x => x.Id == dto.Id, include: false, cancellationToken: cancellationToken);
         Doctor doctor = _mapper.Map<Doctor>(dto);
         await _doctorRepository.UpdateAsync(doctor, cancellationToken);
