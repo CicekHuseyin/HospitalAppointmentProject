@@ -51,4 +51,4 @@ namespace HospitalAppointmentProject.API.Controllers
         public async Task<IActionResult> GetByIdAsync(int id) => Ok(await _appointmentService.GetByIdAsync(id));
     }
 }
-}
+

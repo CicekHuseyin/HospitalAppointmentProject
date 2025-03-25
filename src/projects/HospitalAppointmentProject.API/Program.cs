@@ -2,7 +2,12 @@ using HospitalAppointmentProject.DataAccess.Contexts;
 using HospitalAppointmentProject.DataAccess.Repositories.Abstracts;
 using HospitalAppointmentProject.DataAccess.Repositories.Concretes;
 using HospitalAppointmentProject.Service.Abstracts;
+using HospitalAppointmentProject.Service.BusinessRules.Doctors;
+using HospitalAppointmentProject.Service.BusinessRules.Hospitals;
+using HospitalAppointmentProject.Service.BusinessRules.Patients;
+using HospitalAppointmentProject.Service.BusinessRules.Users;
 using HospitalAppointmentProject.Service.Concretes;
+using HospitalAppointmentProject.Service.Mappers.Profiles;
 using HospitalDoctorProject.Service.Abstracts;
 using HospitalDoctorProject.Service.Concretes;
 using Microsoft.EntityFrameworkCore;
@@ -20,7 +25,8 @@ builder.Services.AddDbContext<BaseDbContext>(opt =>
 {
     opt.UseSqlServer(builder.Configuration.GetConnectionString("SqlConnection"));
 });
-builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
+
+builder.Services.AddAutoMapper(typeof(AutoMapperConfig));
 builder.Services.AddScoped<IDoctorService, DoctorService>();
 builder.Services.AddScoped<IDoctorRepository, DoctorRepository>();
 builder.Services.AddScoped<IAppointmentService, AppointmentService>();
@@ -35,6 +41,12 @@ builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IUserRoleService, UserRoleService>();
 builder.Services.AddScoped<IUserRoleRepository, UserRoleRepository>();
+
+
+builder.Services.AddScoped<DoctorBusinessRules>();
+builder.Services.AddScoped<HospitalBusinessRules>();
+builder.Services.AddScoped<PatientBusinessRules>();
+builder.Services.AddScoped<UserBusinessRules>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
