@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Core.Security.Entities;
 using HospitalAppointmentProject.Model.Dtos.Appointments;
 using HospitalAppointmentProject.Model.Dtos.Doctors;
 using HospitalAppointmentProject.Model.Dtos.Hospitals;
@@ -40,9 +41,10 @@ public sealed class AutoMapperConfig : Profile
 
         CreateMap<UserAddRequestDto, User>();
         CreateMap<UserUpdateRequestDto, User>();
-        CreateMap<User, UserResponseDto>();
+        CreateMap<User, UserResponseDto>().ReverseMap();
 
         CreateMap<RegisterRequestDto, User>();
+        CreateMap<LoginRequestDto, User>();
 
 
     }

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Core.Security.Entities;
 using HospitalAppointmentProject.DataAccess.Repositories.Abstracts;
 using HospitalAppointmentProject.Model.Dtos.Roles;
 using HospitalAppointmentProject.Model.Entities;

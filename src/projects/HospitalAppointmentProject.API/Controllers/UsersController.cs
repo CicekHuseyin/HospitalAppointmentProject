@@ -18,13 +18,13 @@ namespace HospitalAppointmentProject.API.Controllers
             _userService = userService;
         }
 
-        [HttpPost("Add")]
-        public async Task<IActionResult> AddAsync(UserAddRequestDto dto)
-        {
-            var result = await _userService.AddAsync(dto);
+        //[HttpPost("Add")]
+        //public async Task<IActionResult> AddAsync(UserAddRequestDto dto)
+        //{
+        //    var result = await _userService.AddAsync(dto);
 
-            return Ok(result);
-        }
+        //    return Ok(result);
+        //}
 
         [HttpGet("GetAll")]
         public async Task<IActionResult> GetAllAsync()

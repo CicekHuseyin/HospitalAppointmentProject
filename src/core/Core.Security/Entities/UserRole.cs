@@ -1,6 +1,6 @@
 ﻿using Core.DataAccess.Entities;
 
-namespace HospitalAppointmentProject.Model.Entities;
+namespace Core.Security.Entities;
 
 public sealed class UserRole : Entity<int>
 {

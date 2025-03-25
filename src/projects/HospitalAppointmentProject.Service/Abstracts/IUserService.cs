@@ -1,4 +1,5 @@
-﻿using HospitalAppointmentProject.Model.Dtos.Users;
+﻿using Core.Security.Entities;
+using HospitalAppointmentProject.Model.Dtos.Users;
 using HospitalAppointmentProject.Model.Entities;
 
 namespace HospitalAppointmentProject.Service.Abstracts;
