@@ -1,10 +1,11 @@
 ﻿using HospitalAppointmentProject.Model.Dtos.Users;
+using HospitalAppointmentProject.Model.Entities;
 
 namespace HospitalAppointmentProject.Service.Abstracts;
 
 public interface IUserService
 {
-    Task<string> AddAsync(UserAddRequestDto dto, CancellationToken cancellationToken = default);
+    Task<UserResponseDto?> AddAsync(User user, CancellationToken cancellationToken = default);
 
     Task UpdateAsync(UserUpdateRequestDto dto, CancellationToken cancellationToken = default);
 
@@ -12,5 +13,7 @@ public interface IUserService
 
     Task<UserResponseDto?> GetByIdAsync(int id, CancellationToken cancellationToken = default);
 
-    Task DeleteAsync(int id, CancellationToken cancellationToken = default);
+    Task<UserResponseDto?> DeleteAsync(int id, CancellationToken cancellationToken = default);
+
+    Task<UserResponseDto?> GetByEmailAsync(string email, CancellationToken cancellationToken = default);
 }

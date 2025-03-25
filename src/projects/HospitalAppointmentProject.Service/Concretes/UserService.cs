@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using HospitalAppointmentProject.DataAccess.Repositories.Abstracts;
+using HospitalAppointmentProject.DataAccess.Repositories.Concretes;
 using HospitalAppointmentProject.Model.Dtos.Users;
 using HospitalAppointmentProject.Model.Entities;
 using HospitalAppointmentProject.Service.Abstracts;
@@ -21,21 +22,29 @@ public class UserService : IUserService
         _businessRules = businessRules;
     }
 
-    public async Task<string> AddAsync(UserAddRequestDto dto, CancellationToken cancellationToken = default)
+    public async Task<UserResponseDto?> AddAsync(User user, CancellationToken cancellationToken = default)
     {
-        await _businessRules.UserNameMustBeUniqueAsync(dto.Username);
-        User user = _mapper.Map<User>(dto);
-        await _userRepository.AddAsync(user);
-        return UsersMessages.UserAddedMessage;
+        await _businessRules.EmailMustBeUniqueAsync(user.Email);
+        await _businessRules.UserNameMustBeUniqueAsync(user.Username);
+
+        User created = await _userRepository.AddAsync(user, cancellationToken);
+
+        UserResponseDto response = _mapper.Map<UserResponseDto>(created);
+
+        return response;
     }
 
-    public async Task DeleteAsync(int id, CancellationToken cancellationToken = default)
+    public async Task<UserResponseDto?> DeleteAsync(int id, CancellationToken cancellationToken = default)
     {
         await _businessRules.UserIsPresentAsync(id);
 
         User user = await _userRepository.GetAsync(filter: x => x.Id == id, include: false, cancellationToken: cancellationToken);
 
-        await _userRepository.DeleteAsync(user, cancellationToken);
+        User deleted = await _userRepository.DeleteAsync(user, cancellationToken);
+
+        UserResponseDto userResponseDto = _mapper.Map<UserResponseDto>(deleted);
+
+        return userResponseDto;
     }
 
     public async Task<List<UserResponseDto>> GetAllAsync(CancellationToken cancellationToken = default)
@@ -43,6 +52,15 @@ public class UserService : IUserService
         List<User> users = await _userRepository.GetAllAsync(enableTracking: false, cancellationToken: cancellationToken);
         var userResponseDtos = _mapper.Map<List<UserResponseDto>>(users);
         return userResponseDtos;
+    }
+
+    public async Task<UserResponseDto?> GetByEmailAsync(string email, CancellationToken cancellationToken = default)
+    {
+        var user = await _userRepository.GetAsync(filter: x => x.Email == email, include: false, enableTracking: false, cancellationToken: cancellationToken);
+
+        var response = _mapper.Map<UserResponseDto>(user);
+
+        return response;
     }
 
     public async Task<UserResponseDto?> GetByIdAsync(int id, CancellationToken cancellationToken = default)

@@ -8,15 +8,15 @@ public sealed class User : Entity<int>
     {
         Username = string.Empty;
         Email = string.Empty;
-        PasswordHash = string.Empty;
-        PasswordSalt = string.Empty;
+        PasswordHash = Array.Empty<byte>();
+        PasswordSalt = Array.Empty<byte>();
         UserRoles = new List<UserRole>();
     }
 
     public string Username { get; set; }
     public string Email { get; set; }
-    public string PasswordHash { get; set; }
-    public string PasswordSalt { get; set; }
+    public byte[] PasswordHash { get; set; } 
+    public byte[] PasswordSalt { get; set; } 
 
     public ICollection<UserRole> UserRoles { get; set; }
 }

@@ -30,5 +30,19 @@ namespace HospitalAppointmentProject.Service.BusinessRules.Users
                 throw new BusinessException(UsersMessages.UserNotFoundMessage);
             }
         }
+
+        public async Task EmailMustBeUniqueAsync(string email)
+        {
+            bool isPresent = await userRepository.AnyAsync(x => x.Email == email);
+            if (isPresent)
+                throw new BusinessException(UsersMessages.EmailMustBeUnique);
+        }
+
+        public async Task SearchByEmailAsync(string email)
+        {
+            bool isPresent = await userRepository.AnyAsync(x => x.Email == email);
+            if (!isPresent)
+                throw new NotFoundException(UsersMessages.UserNotFoundMessage);
+        }
     }
 }

@@ -11,5 +11,8 @@ namespace HospitalAppointmentProject.Service.Constants.Users
         public const string UserNameMustBeUnniqueMessage = "Kullanıcı Adı Benzersiz Olmalıdır";
         public const string UserAddedMessage = "Kullanıcı Eklendi";
         public const string UserNotFoundMessage = "Kullanıcı Bulunamadı";
+        public const string EmailMustBeUnique = "Email Alanı Benzersiz Olmalıdır";
+        public const string PasswordIsWrong = "Parola Yanlış";
+        
     }
 }

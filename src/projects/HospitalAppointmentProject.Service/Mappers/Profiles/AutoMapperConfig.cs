@@ -42,6 +42,8 @@ public sealed class AutoMapperConfig : Profile
         CreateMap<UserUpdateRequestDto, User>();
         CreateMap<User, UserResponseDto>();
 
+        CreateMap<RegisterRequestDto, User>();
+
 
     }
 }
