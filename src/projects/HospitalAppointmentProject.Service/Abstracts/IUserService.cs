@@ -8,7 +8,7 @@ public interface IUserService
 {
     Task<UserResponseDto?> AddAsync(User user, CancellationToken cancellationToken = default);
 
-    Task UpdateAsync(UserUpdateRequestDto dto, CancellationToken cancellationToken = default);
+    Task<User> UpdateAsync(User user, CancellationToken cancellationToken = default);
 
     Task<List<UserResponseDto>> GetAllAsync(CancellationToken cancellationToken = default);
 

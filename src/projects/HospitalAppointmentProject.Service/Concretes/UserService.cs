@@ -72,11 +72,11 @@ public class UserService : IUserService
         return userResponseDtos;
     }
 
-    public async Task UpdateAsync(UserUpdateRequestDto dto, CancellationToken cancellationToken = default)
+    public async Task<User> UpdateAsync(User user, CancellationToken cancellationToken = default)
     {
-        await _businessRules.UserIsPresentAsync(dto.Id);
-        ////Movie movie = await _movieRepository.GetAsync(filter: x => x.Id == dto.Id, include: false, cancellationToken: cancellationToken);
-        User user = _mapper.Map<User>(dto);
-        await _userRepository.UpdateAsync(user, cancellationToken);
+        await _businessRules.UserIsPresentAsync(user.Id);
+        User updated = await _userRepository.UpdateAsync(user, cancellationToken);
+
+        return updated;
     }
 }

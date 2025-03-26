@@ -1,7 +1,11 @@
-﻿using HospitalAppointmentProject.Service.Abstracts;
+﻿using HospitalAppointmentProject.Model.Entities;
+using HospitalAppointmentProject.Service.Abstracts;
+using HospitalAppointmentProject.Service.BusinessRules.Appointments;
 using HospitalAppointmentProject.Service.BusinessRules.Doctors;
 using HospitalAppointmentProject.Service.BusinessRules.Hospitals;
 using HospitalAppointmentProject.Service.BusinessRules.Patients;
+using HospitalAppointmentProject.Service.BusinessRules.Roles;
+using HospitalAppointmentProject.Service.BusinessRules.UserRoles;
 using HospitalAppointmentProject.Service.BusinessRules.Users;
 using HospitalAppointmentProject.Service.Concretes;
 using HospitalDoctorProject.Service.Abstracts;
@@ -33,6 +37,10 @@ public static class ServiceRegistration
         services.AddScoped<HospitalBusinessRules>();
         services.AddScoped<PatientBusinessRules>();
         services.AddScoped<UserBusinessRules>();
+        services.AddScoped<AppointmentBusinessRules>();
+        services.AddScoped<RoleBusinessRules>();
+        services.AddScoped<UserBusinessRules>();
+        services.AddScoped<UserRoleBusinessRules>();
 
         services.AddAutoMapper(Assembly.GetExecutingAssembly());
 

@@ -10,7 +10,7 @@ using HospitalAppointmentProject.Service.BusinessRules.Users;
 using HospitalAppointmentProject.Service.Constants.Users;
 namespace HospitalAppointmentProject.Service.Concretes;
 
-public sealed class AuthService : IAuthService 
+public sealed class AuthService : IAuthService
 {
     private readonly IUserService _userService;
     private readonly UserBusinessRules _userBusinessRules;
@@ -31,18 +31,14 @@ public sealed class AuthService : IAuthService
 
         UserResponseDto user = await _userService.GetByEmailAsync(requestDto.Email, cancellationToken);
 
-        var verifyPassword = HashingHelper.VerifyPasswordHash(
-            requestDto.Password,
-            Convert.FromBase64String(user.PasswordHash),
-            Convert.FromBase64String(user.PasswordSalt)
-        );
+        var verifyPassword = HashingHelper.VerifyPasswordHash(requestDto.Password, user.PasswordHash, user.PasswordSalt);
 
         if (!verifyPassword)
             throw new BusinessException(UsersMessages.PasswordIsWrong);
 
         User userWithToken = _mapper.Map<User>(user);
 
-        AccessToken accessToken=await _jwtService.CreateAccessTokenAsync(userWithToken);
+        AccessToken accessToken = await _jwtService.CreateAccessTokenAsync(userWithToken);
 
         return accessToken;
 
@@ -57,8 +53,29 @@ public sealed class AuthService : IAuthService
         user.PasswordHash = hashResult.passwordHash;
         user.PasswordSalt = hashResult.passwordSalt;
 
-        await _userService.AddAsync(user);
+        UserResponseDto created = await _userService.AddAsync(user);
 
-        return new AccessToken();
+        User userWithToken = _mapper.Map<User>(created);
+
+        AccessToken accessToken = await _jwtService.CreateAccessTokenAsync(userWithToken);
+
+        return accessToken;
+    }
+
+    public async Task<AccessToken> UpdateUserAsync(int id, UserUpdateRequestDto userUpdateRequestDto)
+    {
+        await _userBusinessRules.UserIsPresentAsync(id);
+
+        UserResponseDto userResponse = await _userService.GetByIdAsync(id);
+
+        User userEntity = _mapper.Map<User>(userResponse);
+
+        User updated = _mapper.Map(userUpdateRequestDto, userEntity);
+
+        await _userService.UpdateAsync(updated);
+
+        AccessToken accessToken = await _jwtService.CreateAccessTokenAsync(updated);
+
+        return accessToken;
     }
 }

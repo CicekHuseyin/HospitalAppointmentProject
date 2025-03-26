@@ -1,5 +1,6 @@
 ﻿using HospitalAppointmentProject.Model.Dtos.Appointments;
 using HospitalAppointmentProject.Model.Dtos.Hospitals;
+using HospitalAppointmentProject.Model.Entities;
 using HospitalAppointmentProject.Service.Abstracts;
 using HospitalAppointmentProject.Service.Concretes;
 using Microsoft.AspNetCore.Http;
@@ -30,7 +31,14 @@ namespace HospitalAppointmentProject.API.Controllers
         public async Task<IActionResult> GetAllAsync()
         {
             var result = await _appointmentService.GetAllAsync();
-            return Ok(result);
+
+            var formattedAppointments = result.Select(a => new
+            {
+                a.Id,
+                AppointmentDate = a.AppointmentDate.ToString("dd.MM.yyyy")
+            });
+
+            return Ok(formattedAppointments);
         }
 
         [HttpPut("Update")]

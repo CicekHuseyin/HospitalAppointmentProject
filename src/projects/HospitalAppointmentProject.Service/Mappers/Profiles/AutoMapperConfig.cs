@@ -40,8 +40,8 @@ public sealed class AutoMapperConfig : Profile
         CreateMap<UserRole, UserRoleResponseDto>();
 
         CreateMap<UserAddRequestDto, User>();
-        CreateMap<UserUpdateRequestDto, User>();
-        CreateMap<User, UserResponseDto>().ReverseMap();
+        CreateMap<UserResponseDto, User>().ReverseMap();
+        CreateMap<UserUpdateRequestDto, User>().ReverseMap();
 
         CreateMap<RegisterRequestDto, User>();
         CreateMap<LoginRequestDto, User>();

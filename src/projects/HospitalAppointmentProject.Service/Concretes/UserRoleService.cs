@@ -4,6 +4,8 @@ using HospitalAppointmentProject.DataAccess.Repositories.Abstracts;
 using HospitalAppointmentProject.Model.Dtos.UserRoles;
 using HospitalAppointmentProject.Model.Entities;
 using HospitalAppointmentProject.Service.Abstracts;
+using HospitalAppointmentProject.Service.BusinessRules.UserRoles;
+using HospitalAppointmentProject.Service.Constants.UserRoles;
 
 namespace UserRoleAppointmentProject.Service.Concretes;
 
@@ -11,24 +13,25 @@ public class UserRoleService : IUserRoleService
 {
     private readonly IUserRoleRepository _userRoleRepository;
     private readonly IMapper _mapper;
+    private readonly UserRoleBusinessRules _businessRules;
 
-    public UserRoleService(IUserRoleRepository userRoleRepository, IMapper mapper)
+    public UserRoleService(IUserRoleRepository userRoleRepository, IMapper mapper, UserRoleBusinessRules businessRules)
     {
         _userRoleRepository = userRoleRepository;
         _mapper = mapper;
+        _businessRules = businessRules;
     }
 
     public async Task<string> AddAsync(UserRoleAddRequestDto dto, CancellationToken cancellationToken = default)
     {
-        //await _businessRules.MovieTitleMustBeUniqueAsync(dto.Name);
         UserRole userRole = _mapper.Map<UserRole>(dto);
         await _userRoleRepository.AddAsync(userRole);
-        return "Buraya Business Roles gelecek";
+        return UserRoleMessages.UserRoleAddedMessage;
     }
 
     public async Task DeleteAsync(int id, CancellationToken cancellationToken = default)
     {
-        //await _businessRules.MovieIsPresentAsync(id);
+        await _businessRules.UserRoleIsPresentAsync(id);
 
         UserRole userRole = await _userRoleRepository.GetAsync(filter: x => x.Id == id, include: false, cancellationToken: cancellationToken);
 
@@ -44,7 +47,7 @@ public class UserRoleService : IUserRoleService
 
     public async Task<UserRoleResponseDto?> GetByIdAsync(int id, CancellationToken cancellationToken = default)
     {
-        //await _businessRules.MovieIsPresentAsync(id);
+        await _businessRules.UserRoleIsPresentAsync(id);
         UserRole userRole = await _userRoleRepository.GetAsync(filter: x => x.Id == id, enableTracking: false, cancellationToken: cancellationToken);
         var userRoleResponseDtos = _mapper.Map<UserRoleResponseDto>(userRole);
         return userRoleResponseDtos;
@@ -52,7 +55,7 @@ public class UserRoleService : IUserRoleService
 
     public async Task UpdateAsync(UserRoleUpdateRequestDto dto, CancellationToken cancellationToken = default)
     {
-        //await _businessRules.MovieIsPresentAsync(dto.Id);
+        await _businessRules.UserRoleIsPresentAsync(dto.Id);
         ////Movie movie = await _movieRepository.GetAsync(filter: x => x.Id == dto.Id, include: false, cancellationToken: cancellationToken);
         UserRole userRole = _mapper.Map<UserRole>(dto);
         await _userRoleRepository.UpdateAsync(userRole, cancellationToken);

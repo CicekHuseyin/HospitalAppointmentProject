@@ -1,4 +1,5 @@
-﻿using HospitalAppointmentProject.Model.Dtos.Hospitals;
+﻿using Core.Security.Entities;
+using HospitalAppointmentProject.Model.Dtos.Hospitals;
 using HospitalAppointmentProject.Model.Dtos.Users;
 using HospitalAppointmentProject.Service.Abstracts;
 using HospitalAppointmentProject.Service.Concretes;
@@ -34,9 +35,9 @@ namespace HospitalAppointmentProject.API.Controllers
         }
 
         [HttpPut("Update")]
-        public async Task<IActionResult> UpdateAsync(UserUpdateRequestDto dto)
+        public async Task<IActionResult> UpdateAsync(User user)
         {
-            await _userService.UpdateAsync(dto);
+            await _userService.UpdateAsync(user);
             return Ok();
         }
 
