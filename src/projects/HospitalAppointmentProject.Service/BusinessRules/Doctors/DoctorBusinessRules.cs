@@ -12,18 +12,18 @@ namespace HospitalAppointmentProject.Service.BusinessRules.Doctors
 {
     public sealed class DoctorBusinessRules
     {
-        private readonly IDoctorRepository _ıDoctorRepository;
+        private readonly IDoctorRepository _iDoctorRepository;
         private readonly DoctorRepository _doctorRepository;
 
-        public DoctorBusinessRules(IDoctorRepository ıDoctorRepository, DoctorRepository doctorRepository)
+        public DoctorBusinessRules(IDoctorRepository iDoctorRepository, DoctorRepository doctorRepository)
         {
-            _ıDoctorRepository = doctorRepository;
+            _iDoctorRepository = doctorRepository;
             _doctorRepository = doctorRepository;
         }
 
         public async Task DoctorNameMustBeUniqueAsync(string name)
         {
-            var isPresent = await _ıDoctorRepository.AnyAsync(x => x.FirstName == name.ToLower());
+            var isPresent = await _iDoctorRepository.AnyAsync(x => x.FirstName == name.ToLower());
             if (isPresent)
             {
                 throw new BusinessException(DoctorMessages.DoctorNameMustBeUnniqueMessage);
@@ -32,22 +32,23 @@ namespace HospitalAppointmentProject.Service.BusinessRules.Doctors
 
         public async Task DoctorIsPresentAsync(int id)
         {
-            var isPresent = await _ıDoctorRepository.AnyAsync(x => x.Id == id);
+            var isPresent = await _iDoctorRepository.AnyAsync(x => x.Id == id);
             if (!isPresent)
             {
                 throw new BusinessException(DoctorMessages.DoctorNotFoundMessage);
             }
         }
 
-        public async Task CheckDoctorLimitAsync(int hospitalId, int specializationId)
+        public async Task CheckDoctorLimitAsync(int hospitalId, string specialization)
         {
             int doctorCount = await _doctorRepository
-                .CountAsync(d => d.HospitalId == hospitalId && d.Id == specializationId);
+                .CountAsync(d => d.HospitalId == hospitalId && d.Specialty.ToUpper() == specialization.ToUpper());
 
             if (doctorCount >= 2)
             {
-                throw new BusinessException($"Bu hastanede {doctorCount} adet {specializationId} uzmanına sahip doktor bulunmaktadır. En fazla 10 doktor eklenebilir.");
+                throw new BusinessException(DoctorMessages.CheckDoctorLimitAsync);
             }
         }
+
     }
 }

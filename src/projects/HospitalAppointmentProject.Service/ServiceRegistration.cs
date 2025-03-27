@@ -1,4 +1,5 @@
-﻿using HospitalAppointmentProject.Model.Entities;
+﻿using HospitalAppointmentProject.DataAccess.Repositories.Concretes;
+using HospitalAppointmentProject.Model.Entities;
 using HospitalAppointmentProject.Service.Abstracts;
 using HospitalAppointmentProject.Service.BusinessRules.Appointments;
 using HospitalAppointmentProject.Service.BusinessRules.Doctors;
@@ -41,6 +42,9 @@ public static class ServiceRegistration
         services.AddScoped<RoleBusinessRules>();
         services.AddScoped<UserBusinessRules>();
         services.AddScoped<UserRoleBusinessRules>();
+
+        services.AddScoped<DoctorRepository>();
+        services.AddScoped<AppointmentRepository>();
 
         services.AddAutoMapper(Assembly.GetExecutingAssembly());
 

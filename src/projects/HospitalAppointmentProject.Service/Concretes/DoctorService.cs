@@ -23,6 +23,7 @@ public class DoctorService :IDoctorService
 
     public async Task<string> AddAsync(DoctorAddRequestDto dto, CancellationToken cancellationToken = default)
     {
+        await _businessRules.CheckDoctorLimitAsync(dto.HospitalId, dto.Specialty);
         await _businessRules.DoctorNameMustBeUniqueAsync(dto.FirstName);
         Doctor doctor = _mapper.Map<Doctor>(dto);
         await _doctorRepository.AddAsync(doctor);

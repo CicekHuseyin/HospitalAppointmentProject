@@ -23,7 +23,7 @@ public class AppointmentService : IAppointmentService
 
     public async Task<string> AddAsync(AppointmentAddRequestDto dto, CancellationToken cancellationToken = default)
     {
-        //await _businessRules.MovieTitleMustBeUniqueAsync(dto.Name);
+        await _businessRules.CheckPatientAppointmentLimitAsync(dto.PatientId,dto.DoctorId,dto.AppointmentDate);
         Appointment appointment = _mapper.Map<Appointment>(dto);
         await _appointmentRepository.AddAsync(appointment);
         return AppointmentMessages.AppointmentAddedMessage;
