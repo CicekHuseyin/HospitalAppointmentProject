@@ -18,6 +18,7 @@ namespace HospitalAppointmentProject.API.Controllers
         }
 
         [HttpPost("Add")]
+        [AllowAnonymous]
         //[Authorize(Roles = "Admin")]
         public async Task<IActionResult> AddAsync(DoctorAddRequestDto dto)
         {
@@ -34,6 +35,7 @@ namespace HospitalAppointmentProject.API.Controllers
         }
 
         [HttpPut("Update")]
+        [AllowAnonymous]
         //[Authorize(Roles = "Admin")]
         public async Task<IActionResult> UpdateAsync(DoctorUpdateRequestDto dto)
         {
@@ -42,6 +44,7 @@ namespace HospitalAppointmentProject.API.Controllers
         }
 
         [HttpDelete("Delete")]
+        [AllowAnonymous]
         //[Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteAsync(int id)
         {

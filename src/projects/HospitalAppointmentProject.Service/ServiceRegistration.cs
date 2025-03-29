@@ -1,5 +1,4 @@
 ﻿using HospitalAppointmentProject.DataAccess.Repositories.Concretes;
-using HospitalAppointmentProject.Model.Entities;
 using HospitalAppointmentProject.Service.Abstracts;
 using HospitalAppointmentProject.Service.BusinessRules.Appointments;
 using HospitalAppointmentProject.Service.BusinessRules.Doctors;
@@ -9,6 +8,7 @@ using HospitalAppointmentProject.Service.BusinessRules.Roles;
 using HospitalAppointmentProject.Service.BusinessRules.UserRoles;
 using HospitalAppointmentProject.Service.BusinessRules.Users;
 using HospitalAppointmentProject.Service.Concretes;
+using HospitalAppointmentProject.Service.Validators;
 using HospitalDoctorProject.Service.Abstracts;
 using HospitalDoctorProject.Service.Concretes;
 using Microsoft.Extensions.DependencyInjection;
@@ -45,6 +45,12 @@ public static class ServiceRegistration
 
         services.AddScoped<DoctorRepository>();
         services.AddScoped<AppointmentRepository>();
+
+        services.AddScoped<HospitalValidator>();
+        services.AddScoped<AppointmentValidator>();
+        services.AddScoped<DoctorValidator>();
+        services.AddScoped<PatientValidator>();
+        services.AddScoped<IValidationService, ValidationService>();
 
         services.AddAutoMapper(Assembly.GetExecutingAssembly());
 

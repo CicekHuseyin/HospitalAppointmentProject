@@ -5,6 +5,7 @@ using HospitalAppointmentProject.Model.Entities;
 using HospitalAppointmentProject.Service.Abstracts;
 using HospitalAppointmentProject.Service.BusinessRules.Patients;
 using HospitalAppointmentProject.Service.Constants.Patients;
+using HospitalAppointmentProject.Service.Validators;
 
 namespace PatientAppointmentProject.Service.Concretes;
 
@@ -13,16 +14,21 @@ public class PatientService : IPatientService
     private readonly IPatientRepository _patientRepository;
     private readonly IMapper _mapper;
     private readonly PatientBusinessRules _businessRules;
+    private readonly PatientValidator _validationRules;
+    private readonly IValidationService _validationService;
 
-    public PatientService(IPatientRepository patientRepository, IMapper mapper, PatientBusinessRules businessRules)
+    public PatientService(IPatientRepository patientRepository, IMapper mapper, PatientBusinessRules businessRules, PatientValidator validationRules, IValidationService validationService)
     {
         _patientRepository = patientRepository;
         _mapper = mapper;
         _businessRules = businessRules;
+        _validationRules = validationRules;
+        _validationService = validationService;
     }
 
     public async Task<string> AddAsync(PatientAddRequestDto dto, CancellationToken cancellationToken = default)
     {
+        await _validationService.ValidateAsync(_validationRules, dto);
         await _businessRules.PatientNameMustBeUniqueAsync(dto.FirstName);
         Patient patient = _mapper.Map<Patient>(dto);
         await _patientRepository.AddAsync(patient);
