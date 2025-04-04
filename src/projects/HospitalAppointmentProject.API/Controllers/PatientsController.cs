@@ -2,6 +2,7 @@
 using HospitalAppointmentProject.Model.Dtos.Patients;
 using HospitalAppointmentProject.Service.Abstracts;
 using HospitalAppointmentProject.Service.Concretes;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,6 +20,7 @@ namespace HospitalAppointmentProject.API.Controllers
         }
 
         [HttpPost("Add")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> AddAsync(PatientAddRequestDto dto)
         {
             var result = await _patientService.AddAsync(dto);
@@ -34,6 +36,7 @@ namespace HospitalAppointmentProject.API.Controllers
         }
 
         [HttpPut("Update")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> UpdateAsync(PatientUpdateRequestDto dto)
         {
             await _patientService.UpdateAsync(dto);
@@ -41,6 +44,7 @@ namespace HospitalAppointmentProject.API.Controllers
         }
 
         [HttpDelete("delete")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteAsync(int id)
         {
             await _patientService.DeleteAsync(id);

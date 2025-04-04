@@ -43,7 +43,7 @@ public class JwtHelper : ITokenHelper
             tokenOptions.Issuer,
             tokenOptions.Audience,
             expires: _accessTokenExpiration,
-            claims: null,
+            claims: SetClaims(user,roles),
             signingCredentials: signingCredentials
             );
         return jwt;

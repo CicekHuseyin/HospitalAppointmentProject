@@ -2,11 +2,6 @@
 using HospitalAppointmentProject.DataAccess.Repositories.Abstracts;
 using HospitalAppointmentProject.DataAccess.Repositories.Concretes;
 using HospitalAppointmentProject.Service.Constants.Doctors;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HospitalAppointmentProject.Service.BusinessRules.Doctors
 {

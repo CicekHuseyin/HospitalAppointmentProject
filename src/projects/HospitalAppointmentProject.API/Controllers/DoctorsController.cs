@@ -18,8 +18,8 @@ namespace HospitalAppointmentProject.API.Controllers
         }
 
         [HttpPost("Add")]
-        [AllowAnonymous]
-        //[Authorize(Roles = "Admin")]
+        //[AllowAnonymous]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> AddAsync(DoctorAddRequestDto dto)
         {
             var result = await _doctorService.AddAsync(dto);
@@ -35,8 +35,8 @@ namespace HospitalAppointmentProject.API.Controllers
         }
 
         [HttpPut("Update")]
-        [AllowAnonymous]
-        //[Authorize(Roles = "Admin")]
+        //[AllowAnonymous]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> UpdateAsync(DoctorUpdateRequestDto dto)
         {
             await _doctorService.UpdateAsync(dto);
@@ -44,8 +44,8 @@ namespace HospitalAppointmentProject.API.Controllers
         }
 
         [HttpDelete("Delete")]
-        [AllowAnonymous]
-        //[Authorize(Roles = "Admin")]
+        //[AllowAnonymous]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteAsync(int id)
         {
             await _doctorService.DeleteAsync(id);
