@@ -38,7 +38,9 @@ public class DoctorBusinessRulesTest
 
         //Assert:Bu işlemin sonucunda beklenen seneryo
 
+        //Assert.AreEqual(ex.Message, DoctorMessages.DoctorNameMustBeUnniqueMessage);
         Assert.Equals(ex.Message, DoctorMessages.DoctorNameMustBeUnniqueMessage);
+
 
     }
 }

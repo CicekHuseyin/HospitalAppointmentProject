@@ -3,7 +3,7 @@ using System.Text;
 
 namespace Core.Security.Encryption;
 
-
+//Bu sınıf, JWT token'ı imzalarken kullanılacak gizli güvenlik anahtarını (SecurityKey) oluşturur.
 public class SecurityKeyHelper
 {
     public static SecurityKey CreateSecurityKey(string securityKey)

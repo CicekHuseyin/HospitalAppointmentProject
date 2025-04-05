@@ -176,5 +176,22 @@ namespace Core.DataAccess.Repositories
             await Context.SaveChangesAsync(cancellationToken);
             return entity;
         }
+
+        public async Task<int> CountAsync(Expression<Func<TEntity, bool>>? filter = null, bool enableTracking = true, CancellationToken cancellationToken = default)
+        {
+            IQueryable<TEntity> query = Query();
+
+            if (enableTracking is false)
+            {
+                query = query.AsNoTracking();
+            }
+
+            if (filter is not null)
+            {
+                return await query.CountAsync(filter, cancellationToken);
+            }
+
+            return await query.CountAsync(cancellationToken);
+        }
     }
 }

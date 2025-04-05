@@ -8,12 +8,10 @@ namespace HospitalAppointmentProject.Service.BusinessRules.Doctors
     public sealed class DoctorBusinessRules
     {
         private readonly IDoctorRepository _iDoctorRepository;
-        private readonly DoctorRepository _doctorRepository;
 
-        public DoctorBusinessRules(IDoctorRepository iDoctorRepository, DoctorRepository doctorRepository)
+        public DoctorBusinessRules(IDoctorRepository iDoctorRepository)
         {
-            _iDoctorRepository = doctorRepository;
-            _doctorRepository = doctorRepository;
+            _iDoctorRepository = iDoctorRepository;
         }
 
         public async Task DoctorNameMustBeUniqueAsync(string name)
@@ -36,7 +34,7 @@ namespace HospitalAppointmentProject.Service.BusinessRules.Doctors
 
         public async Task CheckDoctorLimitAsync(int hospitalId, string specialization)
         {
-            int doctorCount = await _doctorRepository
+            int doctorCount = await _iDoctorRepository
                 .CountAsync(d => d.HospitalId == hospitalId && d.Specialty.ToUpper() == specialization.ToUpper());
 
             if (doctorCount >= 2)

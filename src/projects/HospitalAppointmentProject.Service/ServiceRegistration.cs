@@ -43,7 +43,6 @@ public static class ServiceRegistration
         services.AddScoped<UserBusinessRules>();
         services.AddScoped<UserRoleBusinessRules>();
 
-        services.AddScoped<DoctorRepository>();
         services.AddScoped<AppointmentRepository>();
 
         services.AddScoped<HospitalValidator>();

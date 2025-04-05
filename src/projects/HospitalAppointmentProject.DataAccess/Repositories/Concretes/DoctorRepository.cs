@@ -13,9 +13,4 @@ public sealed class DoctorRepository : EfRepositoryBase<Doctor, int, BaseDbConte
     {
 
     }
-    public async Task<int> CountAsync(Expression<Func<Doctor, bool>> predicate)
-    {
-        // `predicate` ile gelen koşula göre Doctor sayısını alıyoruz.
-        return await Context.Doctors.CountAsync(predicate);
-    }
 }
