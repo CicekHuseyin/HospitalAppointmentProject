@@ -42,6 +42,5 @@ namespace HospitalAppointmentProject.Service.BusinessRules.Doctors
                 throw new BusinessException(DoctorMessages.CheckDoctorLimitAsync);
             }
         }
-
     }
 }

@@ -1,4 +1,5 @@
-﻿using Core.DataAccess.Entities;
+﻿using Core.CrossCuttingConcerns.Exceptions.Types;
+using Core.DataAccess.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
